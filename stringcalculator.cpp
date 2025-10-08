@@ -1,0 +1,140 @@
+#include "StringCalculator.h"
+#include <stdexcept>
+#include <sstream>
+#include <regex>
+
+int StringCalculator::Add(const std::string &input)
+{
+    if (input.empty())
+    {
+        return 0;
+    }
+
+    std::string numbersPart;
+    std::vector<std::string> delimiters{",", "\n"};
+    if (HasCustomDelimiter(input))
+    {
+        ParseCustomDelimiter(input, delimiters, numbersPart);
+    }
+    else
+    {
+        numbersPart = input;
+    }
+
+    std::vector<int> numbers = SplitAndConvert(numbersPart, delimiters);
+    CheckNegatives(numbers);
+    return SumNumbers(numbers);
+}
+
+bool StringCalculator::HasCustomDelimiter(const std::string &input) const
+{
+    return input.size() > 2 && input[0] == '/' && input[1] == '/';
+}
+
+void StringCalculator::ParseCustomDelimiter(const std::string &input, std::vector<std::string> &delimiters, std::string &numbersPart) const
+{
+    size_t newlinePos = input.find('\n');
+    if (newlinePos == std::string::npos)
+    {
+        numbersPart = input;
+        return;
+    }
+
+    std::string delimiterPart = input.substr(2, newlinePos - 2);
+    numbersPart = input.substr(newlinePos + 1);
+
+    delimiters.clear();
+
+    if (!delimiterPart.empty() && delimiterPart[0] == '[')
+    {
+        std::regex re(R"(\[(.*?)\])");
+        auto begin = std::sregex_iterator(delimiterPart.begin(), delimiterPart.end(), re);
+        auto end = std::sregex_iterator();
+
+        for (auto i = begin; i != end; ++i)
+        {
+            delimiters.push_back(i->str(1));
+        }
+    }
+    else
+    {
+        delimiters.push_back(delimiterPart);
+    }
+}
+
+std::vector<int> StringCalculator::SplitAndConvert(const std::string &numbersPart, const std::vector<std::string> &delimiters) const
+{
+    std::vector<int> numbers;
+    std::string temp = numbersPart;
+
+    for (const auto &delim : delimiters)
+    {
+        size_t pos = 0;
+        while ((pos = temp.find(delim, pos)) != std::string::npos)
+        {
+            temp.replace(pos, delim.length(), ",");
+            pos += 1;
+        }
+    }
+
+    std::stringstream ss(temp);
+    std::string token;
+    while (std::getline(ss, token, ','))
+    {
+        if (!token.empty())
+        {
+            try
+            {
+                int num = std::stoi(token);
+                numbers.push_back(num);
+            }
+            catch (const std::exception &)
+            {
+                throw std::invalid_argument("Invalid number format");
+            }
+        }
+        else
+        {
+            throw std::invalid_argument("Invalid input: empty number detected");
+        }
+    }
+    return numbers;
+}
+
+void StringCalculator::CheckNegatives(const std::vector<int> &numbers) const
+{
+    std::vector<int> negatives;
+    for (int num : numbers)
+    {
+        if (num < 0)
+        {
+            negatives.push_back(num);
+        }
+    }
+    if (!negatives.empty())
+    {
+        std::string msg = "negatives not allowed ";
+        for (size_t i = 0; i < negatives.size(); ++i)
+        {
+            msg += std::to_string(negatives[i]);
+            if (i != negatives.size() - 1)
+            {
+                msg += ",";
+            }
+        }
+        throw std::invalid_argument(msg);
+    }
+}
+
+int StringCalculator::SumNumbers(const std::vector<int> &numbers) const
+{
+    int sum = 0;
+    for (int num : numbers)
+    {
+        if (num <= 1000)
+        {
+            sum += num;
+        }
+    }
+    return sum;
+}
