@@ -24,6 +24,8 @@ Negative numbers in the input cause the method to throw an exception with the me
 Numbers greater than 1000 are ignored in the sum.
 All existing scenarios (default delimiters, new lines, custom delimiters) must be supported simultaneously.
 
+
+
 **Quality Parameters:**
 Maximum Cyclomatic Complexity Number (CCN) per function: 3.
 
@@ -32,6 +34,17 @@ Maximum Cyclomatic Complexity Number (CCN) per function: 3.
 Test-Driven Development (TDD) approach:
 write the smallest failing test first, implement minimal code to pass, then refactor.
 
+**High-Level Design for StringCalculator**
+
+StringCalculator   :   	  Main class containing the Add method.
+Add(string input)  :      Method to parse the input string, validate, and compute the sum according to requirements.
+Input Parsing	     :    - Detect custom delimiter if present.
+ 	                      - Split numbers by delimiters (comma, newline, or custom).
+Validation         :	  - Check for negative numbers and throw exception if any found.
+ 	                      - Ignore numbers > 1000.
+Summation	         :    - Sum all valid numbers and return the result.
+Exception Handling : 	  - Throw exception with all negative numbers listed if negatives are present.
+Unit Tests	       :    - Cover all scenarios: empty input, single number, multiple numbers, new lines, custom delimiters, negatives, large numbers.
 
 
 **Suggested TDD Steps**
