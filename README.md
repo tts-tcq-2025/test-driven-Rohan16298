@@ -1,7 +1,8 @@
 # TDD Driven StringCalculator
 
-Requirement: StringCalculator Add Method
-Purpose:
+**Requirement:** StringCalculator Add Method
+
+**Purpose:**
 Implement a StringCalculator class with an Add method that processes a string input containing numbers separated by delimiters and returns their sum.
 Functional Requirements:
 The Add method accepts a string input representing numbers separated by delimiters.
@@ -32,7 +33,8 @@ Validation	- Check for negative numbers and throw exception if any found.
 Summation	- Sum all valid numbers and return the result.
 Exception Handling	- Throw exception with all negative numbers listed if negatives are present.
 Unit Tests	- Cover all scenarios: empty input, single number, multiple numbers, new lines, custom delimiters, negatives, large numbers.
-Suggested TDD Steps
+
+**Suggested TDD Steps**
 Write a test for empty string input returning 0.
 Implement minimal code to pass the test.
 Write tests for single number input.
