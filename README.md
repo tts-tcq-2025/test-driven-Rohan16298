@@ -4,35 +4,32 @@
 
 **Purpose:**
 Implement a StringCalculator class with an Add method that processes a string input containing numbers separated by delimiters and returns their sum.
-Functional Requirements:
+
+**Functional Requirements:**
 The Add method accepts a string input representing numbers separated by delimiters.
 If the input string is empty, the method returns 0.
 The method supports an unknown number of numbers in the input.
 Numbers can be separated by commas (,) or new lines (\n).
+
 Example valid input: "1\n2,3" returns 6.
+
 Example invalid input: "1,\n" is not supported.
 The method supports custom delimiters specified in the format:
 "//[delimiter]\n[numbers...]"
+
 Example: "//;\n1;2" returns 3.
+
 The custom delimiter can be of any length, e.g., "//[***]\n1***2***3" returns 6.
 Negative numbers in the input cause the method to throw an exception with the message "negatives not allowed" followed by the list of negative numbers found.
 Numbers greater than 1000 are ignored in the sum.
 All existing scenarios (default delimiters, new lines, custom delimiters) must be supported simultaneously.
-Quality Parameters:
+
+**Quality Parameters:**
 Maximum Cyclomatic Complexity Number (CCN) per function: 3.
 100% line and branch coverage through unit tests.
 Test-Driven Development (TDD) approach: write the smallest failing test first, implement minimal code to pass, then refactor.
-High-Level Design for StringCalculator
-Component	Description
-StringCalculator	Main class containing the Add method.
-Add(string input)	Method to parse the input string, validate, and compute the sum according to requirements.
-Input Parsing	- Detect custom delimiter if present.
- 	- Split numbers by delimiters (comma, newline, or custom).
-Validation	- Check for negative numbers and throw exception if any found.
- 	- Ignore numbers > 1000.
-Summation	- Sum all valid numbers and return the result.
-Exception Handling	- Throw exception with all negative numbers listed if negatives are present.
-Unit Tests	- Cover all scenarios: empty input, single number, multiple numbers, new lines, custom delimiters, negatives, large numbers.
+
+
 
 **Suggested TDD Steps**
 Write a test for empty string input returning 0.
