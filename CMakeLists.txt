@@ -15,7 +15,6 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-# Add current source directory to include path so headers are found
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 file(GLOB SOURCES *.cpp)
@@ -24,9 +23,8 @@ add_executable(test-monitor ${SOURCES})
 target_link_libraries(
   test-monitor
   GTest::gtest_main
-  Threads::Threads  # Link pthreads for Linux
+  Threads::Threads
 )
 
 include(GoogleTest)
 gtest_discover_tests(test-monitor)
-
