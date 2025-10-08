@@ -26,8 +26,11 @@ All existing scenarios (default delimiters, new lines, custom delimiters) must b
 
 **Quality Parameters:**
 Maximum Cyclomatic Complexity Number (CCN) per function: 3.
+
 100% line and branch coverage through unit tests.
-Test-Driven Development (TDD) approach: write the smallest failing test first, implement minimal code to pass, then refactor.
+
+Test-Driven Development (TDD) approach:
+write the smallest failing test first, implement minimal code to pass, then refactor.
 
 
 
