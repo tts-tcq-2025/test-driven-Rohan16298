@@ -130,13 +130,13 @@ void StringCalculator::CheckNegatives(const std::vector<int> &numbers) const
     auto negatives = GetNegatives(numbers);
     if (!negatives.empty())
     {
-        std::string msg = "negatives not allowed ";
+        std::string msg = "negatives not allowed: ";
         for (size_t i = 0; i < negatives.size(); ++i)
         {
             msg += std::to_string(negatives[i]);
             if (i != negatives.size() - 1)
             {
-                msg += ",";
+                msg += ", ";
             }
         }
         throw std::invalid_argument(msg);
