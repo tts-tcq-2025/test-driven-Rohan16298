@@ -31,6 +31,20 @@ bool StringCalculator::HasCustomDelimiter(const std::string &input) const
     return input.size() > 2 && input[0] == '/' && input[1] == '/';
 }
 
+std::vector<std::string> StringCalculator::ExtractDelimiters(const std::string &delimiterPart) const
+{
+    std::vector<std::string> delimiters;
+    std::regex re(R"(\[(.*?)\])");
+    auto begin = std::sregex_iterator(delimiterPart.begin(), delimiterPart.end(), re);
+    auto end = std::sregex_iterator();
+
+    for (auto i = begin; i != end; ++i)
+    {
+        delimiters.push_back(i->str(1));
+    }
+    return delimiters;
+}
+
 void StringCalculator::ParseCustomDelimiter(const std::string &input, std::vector<std::string> &delimiters, std::string &numbersPart) const
 {
     size_t newlinePos = input.find('\n');
@@ -47,14 +61,7 @@ void StringCalculator::ParseCustomDelimiter(const std::string &input, std::vecto
 
     if (!delimiterPart.empty() && delimiterPart[0] == '[')
     {
-        std::regex re(R"(\[(.*?)\])");
-        auto begin = std::sregex_iterator(delimiterPart.begin(), delimiterPart.end(), re);
-        auto end = std::sregex_iterator();
-
-        for (auto i = begin; i != end; ++i)
-        {
-            delimiters.push_back(i->str(1));
-        }
+        delimiters = ExtractDelimiters(delimiterPart);
     }
     else
     {
@@ -62,11 +69,8 @@ void StringCalculator::ParseCustomDelimiter(const std::string &input, std::vecto
     }
 }
 
-std::vector<int> StringCalculator::SplitAndConvert(const std::string &numbersPart, const std::vector<std::string> &delimiters) const
+std::string StringCalculator::ReplaceDelimitersWithComma(std::string temp, const std::vector<std::string> &delimiters) const
 {
-    std::vector<int> numbers;
-    std::string temp = numbersPart;
-
     for (const auto &delim : delimiters)
     {
         size_t pos = 0;
@@ -76,6 +80,13 @@ std::vector<int> StringCalculator::SplitAndConvert(const std::string &numbersPar
             pos += 1;
         }
     }
+    return temp;
+}
+
+std::vector<int> StringCalculator::SplitAndConvert(const std::string &numbersPart, const std::vector<std::string> &delimiters) const
+{
+    std::vector<int> numbers;
+    std::string temp = ReplaceDelimitersWithComma(numbersPart, delimiters);
 
     std::stringstream ss(temp);
     std::string token;
@@ -101,7 +112,7 @@ std::vector<int> StringCalculator::SplitAndConvert(const std::string &numbersPar
     return numbers;
 }
 
-void StringCalculator::CheckNegatives(const std::vector<int> &numbers) const
+std::vector<int> StringCalculator::GetNegatives(const std::vector<int> &numbers) const
 {
     std::vector<int> negatives;
     for (int num : numbers)
@@ -111,6 +122,12 @@ void StringCalculator::CheckNegatives(const std::vector<int> &numbers) const
             negatives.push_back(num);
         }
     }
+    return negatives;
+}
+
+void StringCalculator::CheckNegatives(const std::vector<int> &numbers) const
+{
+    auto negatives = GetNegatives(numbers);
     if (!negatives.empty())
     {
         std::string msg = "negatives not allowed ";
