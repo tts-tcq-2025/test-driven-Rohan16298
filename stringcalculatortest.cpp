@@ -1,7 +1,7 @@
 #include "stringcalculatortest.h"
 #include <cstdio>
-#include <iostream>
 #include <string>
+#include <iostream>
 #include <gtest/gtest.h>
 #include "stringcalculator.h"
 
