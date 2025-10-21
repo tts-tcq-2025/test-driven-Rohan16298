@@ -53,6 +53,11 @@ void StringCalculator::ParseCustomDelimiter(const std::string &input,
 
     delimiters.clear();
 
+    AddDelimitersFromPart(delimiterPart, delimiters);
+}
+
+void StringCalculator::AddDelimitersFromPart(const std::string &delimiterPart,
+                                             std::vector<std::string> &delimiters) const {
     if (!delimiterPart.empty() && delimiterPart[0] == '[') {
         delimiters = ExtractDelimiters(delimiterPart);
     } else {
