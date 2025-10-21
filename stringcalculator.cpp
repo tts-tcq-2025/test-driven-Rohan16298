@@ -132,6 +132,6 @@ std::string StringCalculator::BuildNegativeNumbersMessage(
 }
 
 int StringCalculator::SumNumbers(const std::vector<int> &numbers) const {
-    int sum = std::accumulate(numbers.begin(), numbers.end(), 0);
-    return sum;
+    return std::accumulate(numbers.begin(), numbers.end(), 0,
+        [](int acc, int n) { return acc + (n <= 1000 ? n : 0); });
 }
