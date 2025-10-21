@@ -10,15 +10,12 @@ int StringCalculator::Add(const std::string &input)
         return 0;
     }
 
-    std::string numbersPart;
+    std::string numbersPart = input;
     std::vector<std::string> delimiters{",", "\n"};
+
     if (HasCustomDelimiter(input))
     {
         ParseCustomDelimiter(input, delimiters, numbersPart);
-    }
-    else
-    {
-        numbersPart = input;
     }
 
     std::vector<int> numbers = SplitAndConvert(numbersPart, delimiters);
@@ -153,5 +150,7 @@ int StringCalculator::SumNumbers(const std::vector<int> &numbers) const
             sum += num;
         }
     }
+    return sum;
+}
     return sum;
 }
