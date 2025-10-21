@@ -1,14 +1,11 @@
 #include "stringcalculator.h"
-#include <stdio.h>                 
+#include <gtest/gtest.h>
 #include <iostream>
-
 #include <cstdio>
 #include <string>
 
-#include <gtest/gtest.h>
-
 class StringCalculatorTest : public ::testing::Test {
- protected:
+protected:
     StringCalculator calculator;
 };
 
