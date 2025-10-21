@@ -1,5 +1,6 @@
 #include "include/stringcalculator.hpp"
 #include <stdio.h>
+#include <numeric>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -105,12 +106,8 @@ int StringCalculator::ConvertTokenToInt(const std::string &token) const {
 
 std::vector<int> StringCalculator::GetNegatives(const std::vector<int> &numbers) const {
     std::vector<int> negatives;
-    for (int num : numbers) {
-        if (num < 0) {
-            negatives.push_back(num);
-        }
-    }
-    return negatives;
+std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(negatives),
+             [](int num) { return num < 0; });
 }
 
 void StringCalculator::CheckNegatives(const std::vector<int> &numbers) const {
@@ -133,11 +130,6 @@ std::string StringCalculator::BuildNegativeNumbersMessage(
 }
 
 int StringCalculator::SumNumbers(const std::vector<int> &numbers) const {
-    int sum = 0;
-    for (int num : numbers) {
-        if (num <= 1000) {
-            sum += num;
-        }
-    }
+int sum = std::accumulate(numbers.begin(), numbers.end(), 0);
     return sum;
 }
