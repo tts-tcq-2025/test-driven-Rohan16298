@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "StringCalculator.h"
+#include <gtest/gtest.h>
 
 class StringCalculatorTest : public ::testing::Test
 {
