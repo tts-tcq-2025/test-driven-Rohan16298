@@ -4,34 +4,40 @@
 #include <string>
 #include "include/stringcalculator.hpp"
 
-class StringCalculatorTest : public ::testing::Test {
-};
+class StringCalculatorTest : public ::testing::Test {};
 
 TEST_F(StringCalculatorTest, EmptyStringReturnsZero) {
+    StringCalculator calculator;
     EXPECT_EQ(calculator.Add(""), 0);
 }
 
 TEST_F(StringCalculatorTest, SingleNumberReturnsValue) {
+    StringCalculator calculator;
     EXPECT_EQ(calculator.Add("5"), 5);
 }
 
 TEST_F(StringCalculatorTest, TwoNumbersCommaDelimited) {
+    StringCalculator calculator;
     EXPECT_EQ(calculator.Add("1,2"), 3);
 }
 
 TEST_F(StringCalculatorTest, TwoNumbersNewlineDelimited) {
+    StringCalculator calculator;
     EXPECT_EQ(calculator.Add("1\n2"), 3);
 }
 
 TEST_F(StringCalculatorTest, ThreeNumbersDelimitedVariousWays) {
+    StringCalculator calculator;
     EXPECT_EQ(calculator.Add("1\n2,3"), 6);
 }
 
 TEST_F(StringCalculatorTest, CustomDelimiter) {
+    StringCalculator calculator;
     EXPECT_EQ(calculator.Add("//;\n1;2"), 3);
 }
 
 TEST_F(StringCalculatorTest, NegativeNumbersThrow) {
+    StringCalculator calculator;
     try {
         calculator.Add("1,-2,3,-4");
         FAIL() << "Expected std::invalid_argument";
@@ -46,5 +52,6 @@ TEST_F(StringCalculatorTest, NegativeNumbersThrow) {
 }
 
 TEST_F(StringCalculatorTest, NumbersGreaterThan1000Ignored) {
+    StringCalculator calculator;
     EXPECT_EQ(calculator.Add("2,1001"), 2);
 }
