@@ -1,4 +1,4 @@
-#include "stringcalculatortest.hpp"
+#include "include/stringcalculatortest.hpp"
 #include <gtest/gtest.h>
 #include <iostream>
 #include <string>
