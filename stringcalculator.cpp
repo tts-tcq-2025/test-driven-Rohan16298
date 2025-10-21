@@ -104,10 +104,12 @@ int StringCalculator::ConvertTokenToInt(const std::string &token) const {
     }
 }
 
+// FIXED FUNCTION: Added missing return statement
 std::vector<int> StringCalculator::GetNegatives(const std::vector<int> &numbers) const {
     std::vector<int> negatives;
-std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(negatives),
-             [](int num) { return num < 0; });
+    std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(negatives),
+                 [](int num) { return num < 0; });
+    return negatives;
 }
 
 void StringCalculator::CheckNegatives(const std::vector<int> &numbers) const {
@@ -130,6 +132,6 @@ std::string StringCalculator::BuildNegativeNumbersMessage(
 }
 
 int StringCalculator::SumNumbers(const std::vector<int> &numbers) const {
-int sum = std::accumulate(numbers.begin(), numbers.end(), 0);
+    int sum = std::accumulate(numbers.begin(), numbers.end(), 0);
     return sum;
 }
