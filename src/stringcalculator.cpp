@@ -1,4 +1,4 @@
-#include "stringcalculator.h"
+#include "include/stringcalculator.h"
 #include <stdio.h>
 #include <iostream>
 #include <string>
