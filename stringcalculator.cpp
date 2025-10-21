@@ -89,24 +89,25 @@ std::vector<int> StringCalculator::SplitAndConvert(const std::string &numbersPar
     std::string token;
     while (std::getline(ss, token, ','))
     {
-        if (!token.empty())
-        {
-            try
-            {
-                int num = std::stoi(token);
-                numbers.push_back(num);
-            }
-            catch (const std::exception &)
-            {
-                throw std::invalid_argument("Invalid number format");
-            }
-        }
-        else
+        if (token.empty())
         {
             throw std::invalid_argument("Invalid input: empty number detected");
         }
+        numbers.push_back(ConvertTokenToInt(token));
     }
     return numbers;
+}
+
+int StringCalculator::ConvertTokenToInt(const std::string &token) const
+{
+    try
+    {
+        return std::stoi(token);
+    }
+    catch (const std::exception &)
+    {
+        throw std::invalid_argument("Invalid number format");
+    }
 }
 
 std::vector<int> StringCalculator::GetNegatives(const std::vector<int> &numbers) const
@@ -127,17 +128,22 @@ void StringCalculator::CheckNegatives(const std::vector<int> &numbers) const
     auto negatives = GetNegatives(numbers);
     if (!negatives.empty())
     {
-        std::string msg = "negatives not allowed: ";
-        for (size_t i = 0; i < negatives.size(); ++i)
-        {
-            msg += std::to_string(negatives[i]);
-            if (i != negatives.size() - 1)
-            {
-                msg += ", ";
-            }
-        }
-        throw std::invalid_argument(msg);
+        throw std::invalid_argument(BuildNegativeNumbersMessage(negatives));
     }
+}
+
+std::string StringCalculator::BuildNegativeNumbersMessage(const std::vector<int> &negatives) const
+{
+    std::string msg = "negatives not allowed: ";
+    for (size_t i = 0; i < negatives.size(); ++i)
+    {
+        msg += std::to_string(negatives[i]);
+        if (i != negatives.size() - 1)
+        {
+            msg += ", ";
+        }
+    }
+    return msg;
 }
 
 int StringCalculator::SumNumbers(const std::vector<int> &numbers) const
@@ -150,7 +156,5 @@ int StringCalculator::SumNumbers(const std::vector<int> &numbers) const
             sum += num;
         }
     }
-    return sum;
-}
     return sum;
 }
