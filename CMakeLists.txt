@@ -17,7 +17,7 @@ enable_testing()
 file(GLOB SOURCES "*.cpp")
 add_executable(test-monitor ${SOURCES})
 
-target_include_directories(test-monitor PRIVATE ${CMAKE_SOURCE_DIR})
+target_include_directories(test-monitor PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 target_link_libraries(
   test-monitor
@@ -25,6 +25,7 @@ target_link_libraries(
 )
 include(GoogleTest)
 gtest_discover_tests(test-monitor)
+
 
 
 
