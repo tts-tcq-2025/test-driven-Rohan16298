@@ -1,4 +1,5 @@
-#include "include/stringcalculator.h"
+#include "stringcalculator.h"
+#include "stringcalculatortest.h"
 
 #include <cstdio>
 #include <string>
