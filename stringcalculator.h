@@ -5,10 +5,10 @@
 #include <vector>
 
 class StringCalculator {
-public:
+ public:
     int Add(const std::string &input);
 
-private:
+ private:
     bool HasCustomDelimiter(const std::string &input) const;
     std::vector<std::string> ExtractDelimiters(const std::string &delimiterPart) const;
     void ParseCustomDelimiter(const std::string &input,
