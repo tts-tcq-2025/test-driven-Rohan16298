@@ -1,4 +1,4 @@
-#include "stringcalculator.h"
+#include "StringCalculator.h"
 #include <string>
 #include <vector>
 #include <stdexcept>
