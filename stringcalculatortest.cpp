@@ -5,7 +5,6 @@
 #include "include/stringcalculator.hpp"
 
 class StringCalculatorTest : public ::testing::Test {
- // No member variables needed
 };
 
 TEST_F(StringCalculatorTest, EmptyStringReturnsZero) {
