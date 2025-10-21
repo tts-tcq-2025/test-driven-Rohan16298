@@ -1,8 +1,8 @@
-#include "stringcalculatortest.h"
+#include "stringcalculatortest.hpp"
 #include <gtest/gtest.h>
 #include <iostream>
 #include <string>
-#include "stringcalculator.h"
+#include "stringcalculator.hpp"
 
 class StringCalculatorTest : public ::testing::Test {
  protected:
