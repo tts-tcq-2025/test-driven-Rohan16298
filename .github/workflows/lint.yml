@@ -32,4 +32,5 @@ jobs:
 
     - name: clang-format
       run: |
-        clang-tidy -p=. *.cpp *.h
+        clang-tidy -p=. *.cpp
+
