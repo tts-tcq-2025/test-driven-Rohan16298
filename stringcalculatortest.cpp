@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <string>
-#include "stringcalculator.hpp"
+#include "include/stringcalculator.hpp"
 
 class StringCalculatorTest : public ::testing::Test {
  protected:
