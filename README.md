@@ -1,35 +1,67 @@
 # TDD Driven StringCalculator
 
-Build a StringCalculator functionality that can take up to two numbers, separated by commas, and will return their sum. 
-for example “” or “1” or “1,2” as inputs.
+**Requirement:** StringCalculator Add Method
 
-> DO NOT jump into implementation! Read the example and the starting task below.
+**Purpose:**
+Implement a StringCalculator class with an Add method that processes a string input containing numbers separated by delimiters and returns their sum.
 
-- For an empty string it will return 0
-- Allow the Add method to handle an unknown amount of numbers
-- Allow the Add method to handle new lines between numbers (instead of commas).
-  - the following input is ok: “1\n2,3” (will equal 6)
-  - the following input is NOT ok: “1,\n” (not need to prove it - just clarifying)
-- Support different delimiters : to change a delimiter, the beginning of the string will contain a separate line that looks like this: “//[delimiter]\n[numbers…]” for example “//;\n1;2” should return three where the default delimiter is ‘;’ .
-the first line is optional. all existing scenarios should still be supported
-- Calling Method with a negative number will throw an exception “negatives not allowed” - and the negative that was passed. if there are multiple negatives, show all of them in the exception message.
-- Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2
-- Delimiters can be of any length with the following format: “//[delimiter]\n” for example: “//[***]\n1***2***3” should return 6
+**Functional Requirements:**
+The Add method accepts a string input representing numbers separated by delimiters.
+If the input string is empty, the method returns 0.
+The method supports an unknown number of numbers in the input.
+Numbers can be separated by commas (,) or new lines (\n).
 
-## Tasks
+Example valid input: "1\n2,3" returns 6.
+
+Example invalid input: "1,\n" is not supported.
+The method supports custom delimiters specified in the format:
+"//[delimiter]\n[numbers...]"
+
+Example: "//;\n1;2" returns 3.
+
+The custom delimiter can be of any length, e.g., "//[***]\n1***2***3" returns 6.
+Negative numbers in the input cause the method to throw an exception with the message "negatives not allowed" followed by the list of negative numbers found.
+Numbers greater than 1000 are ignored in the sum.
+All existing scenarios (default delimiters, new lines, custom delimiters) must be supported simultaneously.
 
 
 
-Establish quality parameters:
+**Quality Parameters:**
+Maximum Cyclomatic Complexity Number (CCN) per function: 3.
 
-- Ensure  maximum complexity (CCN) per function == 3
+100% line and branch coverage through unit tests.
 
-- Ensure 100% line and branch coverage at every step
+Test-Driven Development (TDD) approach:
+write the smallest failing test first, implement minimal code to pass, then refactor.
 
-  
+**High-Level Design for StringCalculator**
 
-Start Test-driven approach
+StringCalculator   :   	  Main class containing the Add method.
+Add(string input)  :      Method to parse the input string, validate, and compute the sum according to requirements.
+Input Parsing	     :    - Detect custom delimiter if present.
+ 	                      - Split numbers by delimiters (comma, newline, or custom).
+Validation         :	  - Check for negative numbers and throw exception if any found.
+ 	                      - Ignore numbers > 1000.
+Summation	         :    - Sum all valid numbers and return the result.
+Exception Handling : 	  - Throw exception with all negative numbers listed if negatives are present.
+Unit Tests	       :    - Cover all scenarios: empty input, single number, multiple numbers, new lines, custom delimiters, negatives, large numbers.
 
-1. Write the smallest possible failing test: give input `"" assert output to be 0 ` .
-2. Write the minimum amount of code that'll make it pass.
-3. Refactor any assumptions, continue to pass this test. Do not add any code without a corresponding test.
+
+**Suggested TDD Steps**
+Write a test for empty string input returning 0.
+Implement minimal code to pass the test.
+Write tests for single number input.
+Implement code to handle single number.
+Write tests for two numbers separated by comma.
+Implement code to sum two numbers.
+Write tests for unknown amount of numbers.
+Implement code to handle multiple numbers.
+Write tests for new line delimiter support.
+Implement code to handle new lines.
+Write tests for custom delimiter support.
+Implement code to parse and use custom delimiters.
+Write tests for negative number exception.
+Implement exception throwing with all negatives listed.
+Write tests for ignoring numbers > 1000.
+Implement logic to ignore large numbers.
+Refactor code ensuring CCN ≤ 3 and 100% coverage.
