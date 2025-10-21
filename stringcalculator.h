@@ -14,6 +14,8 @@ class StringCalculator {
     void ParseCustomDelimiter(const std::string &input,
                               std::vector<std::string> &delimiters,
                               std::string &numbersPart) const;
+    void AddDelimitersFromPart(const std::string &delimiterPart,
+                               std::vector<std::string> &delimiters) const;
     std::string ReplaceDelimitersWithComma(std::string temp,
                                            const std::vector<std::string> &delimiters) const;
     std::vector<int> SplitAndConvert(const std::string &numbersPart,
